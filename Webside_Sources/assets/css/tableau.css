@@ -1,0 +1,13 @@
+thead{
+    background-color: #272d33;
+}
+th{
+    color:  white;
+}
+div table tbody tr .id_produit{
+    background-color: #444e5a;
+    color: white;
+}
+div table tbody tr .modifsup{
+    background-color: #b6bcc3 ;
+}

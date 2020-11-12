@@ -1,0 +1,16 @@
+/* Show it is fixed to the top */
+body {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  min-height: 75rem;
+  padding-top: 4.5rem;
+  padding-bottom: 20px;
+}
+.navbar {
+  margin-bottom: 20px;
+}
+
+.force {
+  display: flex;
+  justify-content:space-between;
+}
+
