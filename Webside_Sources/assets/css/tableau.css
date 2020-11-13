@@ -8,6 +8,47 @@ div table tbody tr .id_produit{
     background-color: #444e5a;
     color: white;
 }
-div table tbody tr .modifsup{
-    background-color: #b6bcc3 ;
+main div section div h1{
+    font-size: 5rem;
+    padding-bottom:25px;
 }
+main{
+    margin: 0 auto !important;
+    padding: 0 auto !important;
+    max-width:100%!important;
+}
+main div section div{
+    display: flex;
+    justify-content: center;
+}
+main div section div img{
+    margin: 0 25px;
+}
+body main div section .h1detail{
+    text-align: center;
+    font-size: 3.6rem;
+    background-color:#444e5a;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    padding-bottom:15px;
+    color: white;
+    width:100%;
+    border:dotted 6px #272d33;
+    
+}
+body main div section p{
+    text-align: center;
+    background-color: #444e5a;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 1.4rem;
+    margin: 0 auto;
+    padding: 4px;
+    border:solid 8px #272d33;
+
+}
+body main div section p a{
+    padding: 10px;
+
+}
+

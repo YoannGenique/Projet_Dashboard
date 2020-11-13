@@ -1,16 +1,11 @@
 /* Show it is fixed to the top */
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
-  min-height: 75rem;
+  max-height:100%;
   padding-top: 4.5rem;
   padding-bottom: 20px;
+  max-width: 100%;
 }
 .navbar {
-  margin-bottom: 20px;
+  margin-bottom: 30px;
 }
-
-.force {
-  display: flex;
-  justify-content:space-between;
-}
-

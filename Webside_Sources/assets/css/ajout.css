@@ -1,0 +1,26 @@
+body main div section h1{
+    text-align: center;
+    font-size: 3.6rem;
+    padding-top: 15px;
+    color: white;
+}
+section{
+    background-color: #444e5a;
+    border: dashed 5px #272d33;
+    margin-top: 10px ;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-bottom: 11px ;
+}
+body main div section label{
+    color: white;
+    
+}
+body main div section div{
+    padding: 10px;
+}
+body main div section button{
+    color: rgb(255, 255, 255)!important;
+    background-color: rgb(16, 13, 36)!important;
+    float: right;
+    margin-right: 9px!important;
+}
