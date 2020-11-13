@@ -3,7 +3,7 @@
 session_start();
 
 //On fait la connection à la base
-require_once('connect.php');
+require_once('assets/require/connect.php');
 
 $sql = 'SELECT * FROM `produit`';
 // On prepare la requete
@@ -14,7 +14,7 @@ $query->execute();
 // on stock le result dans un tableau assoc
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
-require_once('close.php');
+require_once('assets/require/close.php');
 ?>
 
 
@@ -46,7 +46,7 @@ require_once('close.php');
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5rem;">Admin</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="ajout.php">Ajouter un produit</a><br>
-                            <a class="dropdown-item" href="authentification.php?action=deconnexion">Deconnexion</a>
+                            <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
                             </div>
                         </li>
                     </ul>
@@ -108,7 +108,7 @@ require_once('close.php');
                                 <td><?=$produit['Conseils'] ?></td>
                                 <td><?=$produit['Ticket'] ?></td>
                                 <td><?=$produit['Manuel'] ?></td>
-                                <td><a href="details.php?id=<?= $produit['id']?>"><img src="assets/img/voir.png" alt="Inspecter" width="25px" height="25px"></a><a href="modif.php?id=<?= $produit['id'] ?>"><img src="assets/img/modif.png" alt="Modif" width="25px" height="25px"></a>  <a href="supp.php?id=<?= $produit['id'] ?>"><img src="assets/img/supprimer.png" alt="Modif" width="25px" height="25px"></a></td>
+                                <td><a href="details.php?id=<?= $produit['id']?>"><img src="assets/img/voir.png" alt="Inspecter" width="25px" height="25px"></a><a href="modif.php?id=<?= $produit['id'] ?>"><img src="assets/img/modif.png" alt="Modif" width="25px" height="25px"></a>  <a href="assets/require/supp.php?id=<?= $produit['id'] ?>"><img src="assets/img/supprimer.png" alt="Modif" width="25px" height="25px"></a></td>
                             </tr>
                             <?php
                             }

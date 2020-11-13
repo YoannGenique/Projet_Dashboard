@@ -1,3 +1,8 @@
+<?php
+
+session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="fr">
     <head>
@@ -15,7 +20,7 @@
     </head>
     <body class="text-center">
         <!-- Formulaire identification -->
-        <form action="authentification.php" method="POST" class="form-signin">
+        <form action="assets/auth/authentification.php" method="POST" class="form-signin">
             <img class="mb-4" src="assets/img/admin_icon.png" alt="" width="250" height="250">
             <h1 class="h3 mb-3 font-weight-normal">Authentification</h1>
             <label for="inputEmail" class="sr-only">Email address</label>

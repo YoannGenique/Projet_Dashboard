@@ -17,7 +17,7 @@ if($_POST){
     && isset($_POST['Manuel']) && !empty($_POST['Manuel'])){
             
             //On fait la connection à la base
-            require_once('connect.php');
+            require_once('assets/require/connect.php');
             
 
                 // On nettoie les données envoyées
@@ -51,7 +51,7 @@ if($_POST){
 
                 $_SESSION['message'] = "Success Votre Produit à été Ajouter avec succès";
                 
-                require_once('close.php');
+                require_once('assets/require/close.php');
 
                 header('Location:dashboard.php');
 
@@ -89,7 +89,7 @@ if($_POST){
                         <li style="margin-right:60px";   class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5rem;">Admin</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="authentification.php?action=deconnexion">Deconnexion</a>
+                            <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
                             </div>
                         </li>
                     </ul>
@@ -118,9 +118,32 @@ if($_POST){
                             <input type="text" id="Reference" name="Reference" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="Categorie">Catégorie (Tv, Hifi, Périphérique..etc)</label>
-                            <input type="text" id="Categorie" name="Categorie" class="form-control">
-                        </div>
+                            <label for="Categorie">Catégorie</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio1" value="Tv-Hifi">
+                            <label class="form-check-label" for="inlineRadio1">Tv-Hifi</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio2" value="Electroménager">
+                            <label class="form-check-label" for="inlineRadio2">Electroménager</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Informatique">
+                            <label class="form-check-label" for="inlineRadio3">Informatique</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Consoles de Jeux, Accessoires4">
+                            <label class="form-check-label" for="inlineRadio4">Consoles de Jeux, Accessoires</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Jouets">
+                            <label class="form-check-label" for="inlineRadio5">Jouets</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Ustenciles de cuisine">
+                            <label class="form-check-label" for="inlineRadio6">Ustenciles de cuisine</label>
+                            </div>
                         <div class="form-group">
                             <label for='Dateachat'>Date d'achat du Produit</label>
                             <input type="date" id='Dateachat' name='Dateachat' class="form-control">

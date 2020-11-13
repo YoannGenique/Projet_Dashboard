@@ -14,7 +14,7 @@ if($_POST){
     && isset($_POST['Ticket']) && !empty($_POST['Ticket'])
     && isset($_POST['Manuel']) && !empty($_POST['Manuel'])){
         // On inclut la connexion à la base
-        require_once('connect.php');
+        require_once('assets/require/connect.php');
 
         // On nettoie les données envoyées
         $id = strip_tags($_POST['id']);
@@ -48,7 +48,7 @@ if($_POST){
         $query->execute();
 
         $_SESSION['message'] = "Votre Produit à été modifié";
-        require_once('close.php');
+        require_once('assets/require/close.php');
 
         header('Location:dashboard.php');
     }else{
@@ -58,7 +58,7 @@ if($_POST){
 
 // Est-ce que l'id existe et n'est pas vide dans l'URL
 if(isset($_GET['id']) && !empty($_GET['id'])){
-    require_once('connect.php');
+    require_once('assets/require/connect.php');
 
     // On nettoie l'id envoyé
     $id = strip_tags($_GET['id']);
@@ -114,7 +114,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5rem;">Admin</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="ajout.php">Ajouter un produit</a><br>
-                            <a class="dropdown-item" href="authentification.php?action=deconnexion">Deconnexion</a>
+                            <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
                             </div>
                         </li>
                     </ul>
@@ -136,43 +136,66 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 <form method="post">
                 <div class="form-group">
                             <label for="Nom">Nom</label>
-                            <input type="text" id="Nom" name="Nom" class="form-control">
+                            <input type="text" id="Nom" name="Nom" class="form-control" value="<?php echo "$produit[Nom]"?>">
                         </div>
                         <div class="form-group">
                             <label for="Reference">Référence du Produit</label>
-                            <input type="text" id="Reference" name="Reference" class="form-control">
+                            <input type="text" id="Reference" name="Reference" class="form-control" value="<?php echo "$produit[Reference]"?>">
                         </div>
                         <div class="form-group">
-                            <label for="Categorie">Catégorie (Tv, Hifi, Périphérique..etc)</label>
-                            <input type="text" id="Categorie" name="Categorie" class="form-control">
-                        </div>
+                            <label for="Categorie">Catégorie</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio1" value="Tv-Hifi" checked>
+                            <label class="form-check-label" for="inlineRadio1">Tv-Hifi</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio2" value="Electroménager">
+                            <label class="form-check-label" for="inlineRadio2">Electroménager</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Informatique">
+                            <label class="form-check-label" for="inlineRadio3">Informatique</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Consoles de Jeux, Accessoires4">
+                            <label class="form-check-label" for="inlineRadio4">Consoles de Jeux, Accessoires</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Jouets">
+                            <label class="form-check-label" for="inlineRadio5">Jouets</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="Categorie" id="inlineRadio3" value="Ustenciles de cuisine">
+                            <label class="form-check-label" for="inlineRadio6">Ustenciles de cuisine</label>
+                            </div>
                         <div class="form-group">
                             <label for='Dateachat'>Date d'achat du Produit</label>
-                            <input type="date" id='Dateachat' name='Dateachat' class="form-control">
+                            <input type="date" id='Dateachat' name='Dateachat' class="form-control" value="<?php echo "$produit[Dateachat]"?>">
                         </div>
                         <div class="form-group">
                             <label for="Prix">Prix</label>
-                            <input type="text" id="Prix" name="Prix" class="form-control">
+                            <input type="text" id="Prix" name="Prix" class="form-control" value="<?php echo "$produit[Prix]"?>">
                         </div>
                         <div class="form-group">
                             <label for="Lieux">Lieux d'achat du Produit</label>
-                            <input type="text" id="Lieux" name="Lieux" class="form-control">
+                            <input type="text" id="Lieux" name="Lieux" class="form-control" value="<?php echo "$produit[Lieux]"?>">
                         </div>
                         <div class="form-group">
                             <label for="fingarantie">Date de fin de Garantie</label>
-                            <input type="date" id="fingarantie" name="fingarantie" class="form-control">
+                            <input type="date" id="fingarantie" name="fingarantie" class="form-control" value="<?php echo "$produit[fingarantie]"?>">
                         </div>
                         <div class="form-group">
                             <label for="Conseils">Conseils d'Entretient</label>
-                            <input type="text" id="Conseils" name="Conseils" class="form-control">
+                            <input type="text" id="Conseils" name="Conseils" class="form-control" value="<?php echo "$produit[Conseils]"?>">
                         </div>
                         <div class="form-group">
                             <label for="Ticket">Ticket d'achat</label>
-                            <input type="text" id="Ticket" name="Ticket" class="form-control">
+                            <input type="text" id="Ticket" name="Ticket" class="form-control" value="<?php echo "$produit[Ticket]"?>">
                         </div>
                         <div class="form-group">
                             <label for="Manuel">Manuel d'utilisation</label>
-                            <input type="text" id="Manuel" name="Manuel" class="form-control">
+                            <input type="text" id="Manuel" name="Manuel" class="form-control" value="<?php echo "$produit[Manuel]"?>">
                         </div>
                     <input type="hidden" value="<?= $produit['id']?>" name="id">
                     <button class="btn btn-primary">Enregistrer</button>

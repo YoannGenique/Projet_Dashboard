@@ -26,7 +26,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     // On vérifie si le produit existe
     if(!$produit){
         $_SESSION['erreur'] = "ID du Produit n'éxiste pas";
-        header('Location:dashboard.php');
+        header('Location: ../../dashboard.php');
         die();
     }
 
@@ -41,10 +41,10 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     // On exécute la requête
     $query->execute();
     $_SESSION['message'] = "Votre Produit à été supprimé";
-    header('Location:dashboard.php');
+    header('Location:../../dashboard.php');
 
 
 }else{
     $_SESSION['erreur'] = "URL invalide";
-    header('Location:dashboard.php');
+    header('Location:../../dashboard.php');
 }

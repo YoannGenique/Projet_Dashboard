@@ -7,7 +7,7 @@ session_start();
 // es que l'ID existe est n'est pas vide dans l'url
 if(isset($_GET['id']) && !empty($_GET['id'])){
     // Connexion à la base
-    require_once('connect.php');
+    require_once('assets/require/connect.php');
     
     // On nettoie l'id envoyé
     $id = strip_tags($_GET['id']);
@@ -67,7 +67,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                             <a style="font-size: 1.5rem;" class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
                             <div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="ajout.php">Ajouter un produit</a><br>
-                            <a class="dropdown-item" href="authentification.php?action=deconnexion">Deconnexion</a>
+                            <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
                             </div>
                         </li>
                     </ul>
@@ -88,7 +88,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 <p>Conseils d'entretiens: <?= $produit['Conseils'] ?></p>
                 <p>Ticket D'achat: <?= $produit['Ticket'] ?></p>
                 <p>Manuel d'utilisation: <?= $produit['Manuel'] ?></p>
-                <p><a href="dashboard.php"><img src="assets/img/retour.png" alt="retour" width="50px" height="50px"></a> <a href="modif.php?id=<?= $produit['id'] ?>"><img src="assets/img/modif.png" alt="retour" width="50px" height="50px"></a>  <a href="supp.php?id=<?= $produit['id'] ?>"><img src="assets/img/Supprimer.png" alt="retour" width="50px" height="50px"></a></p>
+                <p><a href="dashboard.php"><img src="assets/img/retour.png" alt="retour" width="50px" height="50px"></a> <a href="modif.php?id=<?= $produit['id'] ?>"><img src="assets/img/modif.png" alt="retour" width="50px" height="50px"></a>  <a href="assets/require/supp.php?id=<?= $produit['id'] ?>"><img src="assets/img/Supprimer.png" alt="retour" width="50px" height="50px"></a></p>
             </section>
         </div>
     </main>
