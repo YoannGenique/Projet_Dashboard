@@ -1,41 +1,41 @@
 <?php
 session_start();
-
+// On parametre les entrer sur null
 $email = null;
 $password = null;
-
+// Supprime les balises HTML et PHP d'une chaîne
 $email = strip_tags($_POST['email']);
 $password = strip_tags($_POST['password']);
 
-if (isset($_POST['email']) && isset($_POST['password']))
-{
+// Si quelque chose est déclaré
+if (isset($_POST['email']) && isset($_POST['password'])){
 
-    // DEBUT Partie de connexion à la base de données
+    // On se connect à la base de données
     require_once('../require/connect.php');
 
+    // On prepare une demande de récuperer tout dans colonne email de la table users
     $query = $db->prepare('SELECT * FROM users WHERE email = :email ;');
+
+    // lie le param à ma var query
     $query->bindParam(':email', $email);
+
+    // excute tt les param rentrer
     $query->execute();
-    
 
+    // Me rappel plus à quoi sa sert
     $result = $query->fetch(PDO::FETCH_ASSOC);
-    // $query->closeCursor();
-    // FIN Partie de connexion
-    // DEBUG : 
-    // print_r($result);
-    // var_dump($result);
 
-    if (empty($result['email']) || empty($result['password'])){
-        exit('Identifiant ou mot de passe incorrect');
-    }
-    else {
-        if (($result['email'] == $email) && ($result['password'] == $password)){
+    // Si L'email rentrer & le mdp correspond à celui trouver dans la db alors on accede à la connexion
+    if($email === $result['email'] && $password === $result['password']){
+        $_SESSION['mail'] = $email;
+        $_SESSION['pass'] = $password;
+        header('location:../../dashboard.php');
 
-            header('Location:../../dashboard.php');
+    // Sinon On retourne à la page login avec un message d'erreur
+    }else{
 
-        }else{
-            echo 'Identifiant ou mot de passe incorrect';
-        }
+        $_SESSION['error'] = "Email ou Mot de passe Incorrect";
+        header('location:../../index.php');
     }
     
 }

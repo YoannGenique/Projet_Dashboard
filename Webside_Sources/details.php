@@ -1,8 +1,11 @@
 <?php
 // on demarre la session
 session_start();
-
-
+// Si le mail et le mdp ne sont pas stocker dans la global session alors redirection pas login
+if(!isset($_SESSION['mail']) && !isset($_SESSION['pass'])){
+    $_SESSION['nolog'] = "Veuillez vous identifiez";
+    header('location:index.php');
+}
 
 // es que l'ID existe est n'est pas vide dans l'url
 if(isset($_GET['id']) && !empty($_GET['id'])){
@@ -43,6 +46,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/img/admin_icon.png"/>
     <title>Détail Produit</title>
 
     <!-- css boot -->
@@ -55,27 +59,30 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
 
 </head>
 <body>
-        <nav style="justify-content: space-between;" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark force">
-            <a style="font-size: 1.8rem;" class="navbar-brand" href="dashboard.php">Dashboard</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="clearfix">
-                <div class="collapse navbar-collapse float-right" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li style="margin-right:60px"; class="nav-item dropdown">
-                            <a style="font-size: 1.5rem;" class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown01">
-                            <a class="dropdown-item" href="ajout.php">Ajouter un produit</a><br>
-                            <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+    <!-- Début de Ma nav -->
+    <nav style="justify-content: space-between;" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark force">
+        <a style="font-size: 1.8rem;" class="navbar-brand" href="dashboard.php">Dashboard</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="clearfix">
+            <div class="collapse navbar-collapse float-right" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li style="margin-right:60px"; class="nav-item dropdown">
+                        <a style="font-size: 1.5rem;" class="nav-link dropdown-toggle " href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Admin</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <a class="dropdown-item" href="ajout.php">Ajouter un produit</a><br>
+                        <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
+                    </div>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <!-- Fin de Ma nav -->
     <main class="container detail">
         <div class="row">
+            <!-- Bloc de la page détail du produit -->
             <section class="col-12 test">
                 <h1 class="h1detail">Détails du Produit:<br> <?= $produit['Nom'] ?> </h1>
                 <p>Nom: <?= $produit['Nom'] ?></p>
@@ -88,8 +95,10 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 <p>Conseils d'entretiens: <?= $produit['Conseils'] ?></p>
                 <p>Ticket D'achat: <?= $produit['Ticket'] ?></p>
                 <p>Manuel d'utilisation: <?= $produit['Manuel'] ?></p>
+                <!-- Lien vers la page retour, suppression et modification du produit -->
                 <p><a href="dashboard.php"><img src="assets/img/retour.png" alt="retour" width="50px" height="50px"></a> <a href="modif.php?id=<?= $produit['id'] ?>"><img src="assets/img/modif.png" alt="retour" width="50px" height="50px"></a>  <a href="assets/require/supp.php?id=<?= $produit['id'] ?>"><img src="assets/img/Supprimer.png" alt="retour" width="50px" height="50px"></a></p>
             </section>
+            <!-- Fin du Bloc de la page détail du produit -->
         </div>
     </main>
         <!-- script bootstrap -->

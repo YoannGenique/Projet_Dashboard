@@ -1,7 +1,11 @@
 <?php
 // on demarre la session
 session_start();
-
+// Si le mail et le mdp ne sont pas stocker dans la global session alors redirection pas login
+if(!isset($_SESSION['mail']) && !isset($_SESSION['pass'])){
+    $_SESSION['nolog'] = "Veuillez vous identifiez";
+    header('location:index.php');
+}
 //On fait la connection à la base
 require_once('assets/require/connect.php');
 
@@ -14,6 +18,7 @@ $query->execute();
 // on stock le result dans un tableau assoc
 $result = $query->fetchAll(PDO::FETCH_ASSOC);
 
+// Ferme la base de donnée
 require_once('assets/require/close.php');
 ?>
 
@@ -23,6 +28,7 @@ require_once('assets/require/close.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/img/admin_icon.png"/>
     <title>Dashboard</title>
 
     <!-- Bootstrap + css -->
@@ -34,28 +40,31 @@ require_once('assets/require/close.php');
 
 </head>
 <body>
+    <!-- Début de Ma Nav -->
     <nav style="justify-content: space-between;" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <a class="navbar-brand" href="dashboard.php" style="font-size: 1.8rem;">Dashboard</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div style="justify-content: right!important;" class="clearfix">
-                <div class="collapse navbar-collapse" id="navbarCollapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li style="margin-right:60px";   class="nav-item dropdown">
+        <div style="justify-content: right!important;" class="clearfix">
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li style="margin-right:60px";   class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5rem;">Admin</a>
-                            <div class="dropdown-menu" aria-labelledby="dropdown01">
+                        <div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="ajout.php">Ajouter un produit</a><br>
                             <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+                        </div>
+                    </li>
+                </ul>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <!-- Fin de Ma Nav -->
     <main class="container">
         <div class="row">
             <section class="col-12">
+                    <!-- Mon erreur si l'user se trompe d'id dans l'url -->
                     <?php
                         if(!empty($_SESSION['erreur'])){
                             echo '<div class="alert alert-danger" role="alert">
@@ -64,6 +73,7 @@ require_once('assets/require/close.php');
                                 $_SESSION['erreur'] = "";
                         }
                     ?>
+                    <!-- Mon message quand le produit à été Modifié -->
                     <?php
                         if(!empty($_SESSION['message'])){
                             echo '<div class="alert alert-success" role="alert">
@@ -72,12 +82,15 @@ require_once('assets/require/close.php');
                                 $_SESSION['message'] = "";
                         }
                     ?>
+                        <!-- Mon Titre -->
                         <div>
                             <img src="assets/img/chatd.png" alt="Chat" width="100px" height="100px">
                             <h1> Inventaire </h1>
                             <img src="assets/img/chatg.png" alt="chat" width="100px" height="100px">
                         </div>
+                        <!-- Mon tableau -->
                     <table class="table">
+                        <!-- Mes Titre de Tableau -->
                         <thead>
                             <th>ID produit</th>
                             <th>Nom du produit</th>
@@ -96,6 +109,8 @@ require_once('assets/require/close.php');
                             // on boucle la var result
                             foreach($result as $produit){
                             ?>
+                            <!-- Mes insersion de Tableau -->
+                            <!-- Affiche se que l'admin ajoute -->
                             <tr>
                                 <td class="id_produit"><?=$produit['id'] ?></td>
                                 <td><?=$produit['Nom'] ?></td>
@@ -115,6 +130,7 @@ require_once('assets/require/close.php');
                             ?>
                         </tbody>
                 </table>
+                <!-- Fin de Mon Tableau -->
             </section>
         </div>
     </main>
