@@ -52,3 +52,12 @@ body main div section p a{
 
 }
 
+.container {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+}
+  
+.footer {
+    background-color: #f5f5f5;
+}

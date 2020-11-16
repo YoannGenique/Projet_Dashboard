@@ -39,18 +39,18 @@ require_once('assets/require/close.php');
     <!-- Fin Bootstrap -->
 
 </head>
-<body>
+<body style="max-width: 100% auto;">
     <!-- Début de Ma Nav -->
-    <nav style="justify-content: space-between;" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <nav style="justify-content:space-between;" class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
             <a class="navbar-brand" href="dashboard.php" style="font-size: 1.8rem;">Dashboard</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        <div style="justify-content: right!important;" class="clearfix">
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav mr-auto">
+        <div>
+            <div>
+                <ul class="navbar-nav">
                     <li style="margin-right:60px";   class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5rem;">Admin</a>
+                            <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="font-size: 1.5rem;">Admin</a>
                         <div class="dropdown-menu" aria-labelledby="dropdown01">
                             <a class="dropdown-item" href="ajout.php">Ajouter un produit</a><br>
                             <a class="dropdown-item" href="assets/require/deconnection.php">Déconnexion</a>
@@ -61,9 +61,9 @@ require_once('assets/require/close.php');
         </div>
     </nav>
     <!-- Fin de Ma Nav -->
-    <main class="container">
-        <div class="row">
-            <section class="col-12">
+    <main>
+        <div>
+            <section>
                     <!-- Mon erreur si l'user se trompe d'id dans l'url -->
                     <?php
                         if(!empty($_SESSION['erreur'])){
@@ -89,7 +89,7 @@ require_once('assets/require/close.php');
                             <img src="assets/img/chatg.png" alt="chat" width="100px" height="100px">
                         </div>
                         <!-- Mon tableau -->
-                    <table class="table">
+                    <table class="table table-striped">
                         <!-- Mes Titre de Tableau -->
                         <thead>
                             <th>ID produit</th>
