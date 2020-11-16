@@ -6,8 +6,9 @@ if(!isset($_SESSION['mail']) && !isset($_SESSION['pass'])){
     $_SESSION['nolog'] = "Veuillez vous identifiez";
     header('location:index.php');
 }
-//Vérifie Si les champs ne sont pas vide
-if($_POST){
+// jsp
+if($_POST && $_FILES){
+    //Vérifie Si les champs ne sont pas vide
     if(isset($_POST['Nom']) && !empty($_POST['Nom'])
     && isset($_POST['Reference']) && !empty($_POST['Reference'])
     && isset($_POST['Categorie']) && !empty($_POST['Categorie'])
@@ -16,50 +17,59 @@ if($_POST){
     && isset($_POST['Lieux']) && !empty($_POST['Lieux'])
     && isset($_POST['fingarantie']) && !empty($_POST['fingarantie'])
     && isset($_POST['Conseils']) && !empty($_POST['Conseils'])
-    && isset($_POST['Ticket']) && !empty($_POST['Ticket'])
+    && isset($_FILES['Ticket']) && !empty($_FILES['Ticket'])
     && isset($_POST['Manuel'])){
 
         // On se connect à la base de donnée
         require_once('assets/require/connect.php');
 
-            // On nettoie les données envoyées
-            // Supprime les balises HTML et PHP d'une chaîne
-            $id = strip_tags($_POST['id']);
-            $Nom = strip_tags($_POST['Nom']);
-            $Reference = strip_tags($_POST['Reference']);
-            $Categorie = strip_tags($_POST['Categorie']);
-            $Dateachat = strip_tags($_POST['Dateachat']);
-            $Prix = strip_tags($_POST['Prix']);
-            $Lieux = strip_tags($_POST['Lieux']);
-            $fingarantie = strip_tags($_POST['fingarantie']);
-            $Conseils = strip_tags($_POST['Conseils']);
-            $Ticket = strip_tags($_POST['Ticket']);
-            $Manuel = strip_tags($_POST['Manuel']);
+        // On nettoie les données envoyées
+        // Supprime les balises HTML et PHP d'une chaîne
+        $id = strip_tags($_POST['id']);
+        $Nom = strip_tags($_POST['Nom']);
+        $Reference = strip_tags($_POST['Reference']);
+        $Categorie = strip_tags($_POST['Categorie']);
+        $Dateachat = strip_tags($_POST['Dateachat']);
+        $Prix = strip_tags($_POST['Prix']);
+        $Lieux = strip_tags($_POST['Lieux']);
+        $fingarantie = strip_tags($_POST['fingarantie']);
+        $Conseils = strip_tags($_POST['Conseils']);
+        $Ticket = strip_tags($_POST['Ticket']);
+        $Manuel = strip_tags($_POST['Manuel']);
 
-            // Modifie dans la Table produit, les champs remplie correspondant à la ligne correspondant
-            $sql = 'UPDATE `produit` SET `Nom`=:Nom, `Reference`=:Reference, `Categorie`=:Categorie, `Dateachat`=:Dateachat, `Prix`=:Prix, `Lieux`=:Lieux, `fingarantie`=:fingarantie, `Conseils`=:Conseils, `Ticket`=:Ticket, `Manuel`=:Manuel WHERE `id`=:id;';
-            // On prepare la requête
-            $query = $db->prepare($sql);
-            // On param notre query avec le param adéquat à chaque champ
-            $query->bindValue(':id', $id, PDO::PARAM_INT);
-            $query->bindValue(':Nom', $Nom, PDO::PARAM_STR);
-            $query->bindValue(':Reference', $Reference, PDO::PARAM_STR);
-            $query->bindValue(':Categorie', $Categorie, PDO::PARAM_STR);
-            $query->bindValue(':Dateachat', $Dateachat, PDO::PARAM_STR);
-            $query->bindValue(':Prix', $Prix, PDO::PARAM_STR);
-            $query->bindValue(':Lieux', $Lieux, PDO::PARAM_STR);
-            $query->bindValue(':fingarantie', $fingarantie, PDO::PARAM_STR);
-            $query->bindValue(':Conseils', $Conseils, PDO::PARAM_STR);
-            $query->bindValue(':Ticket', $Ticket, PDO::PARAM_STR);
-            $query->bindValue(':Manuel', $Manuel, PDO::PARAM_STR);
-            // excute tt les param rentrer
-            $query->execute();
-            // On parametre le message si tout à fonctionner
-            $_SESSION['message'] = "Votre Produit à été modifié";
-            // On ferme la base de donnée
-            require_once('assets/require/close.php');
-            // On fait la redirection vers la dashboard ou sera affiché le message 
-            header('Location:dashboard.php');
+        //met dans la var le chemin ou je veux que le ticket soit save 
+        $uploadchemin = 'assets/imgproduit/';
+        // On insert dans la var $uploadfile le chemin plus nom du fichier envoyer dans la $_FILES
+        $uploadfichier = $uploadchemin . basename($_FILES['Ticket']['name']);
+        // Si le fichier télécharger n'est pas déplacé à l'endroit indiqué
+        if (!move_uploaded_file($_FILES['Ticket']['tmp_name'], $uploadfichier)){
+            $_SESSION['erreurticket'] = "Il y'a eu un problème avec l'importation du ticket";
+        }
+        
+        // Modifie dans la Table produit, les champs remplie correspondant à la ligne correspondant
+        $sql = 'UPDATE `produit` SET `Nom`=:Nom, `Reference`=:Reference, `Categorie`=:Categorie, `Dateachat`=:Dateachat, `Prix`=:Prix, `Lieux`=:Lieux, `fingarantie`=:fingarantie, `Conseils`=:Conseils, `Ticket`=:Ticket, `Manuel`=:Manuel WHERE `id`=:id;';
+        // On prepare la requête
+        $query = $db->prepare($sql);
+        // On param notre query avec le param adéquat à chaque champ
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->bindValue(':Nom', $Nom, PDO::PARAM_STR);
+        $query->bindValue(':Reference', $Reference, PDO::PARAM_STR);
+        $query->bindValue(':Categorie', $Categorie, PDO::PARAM_STR);
+        $query->bindValue(':Dateachat', $Dateachat, PDO::PARAM_STR);
+        $query->bindValue(':Prix', $Prix, PDO::PARAM_STR);
+        $query->bindValue(':Lieux', $Lieux, PDO::PARAM_STR);
+        $query->bindValue(':fingarantie', $fingarantie, PDO::PARAM_STR);
+        $query->bindValue(':Conseils', $Conseils, PDO::PARAM_STR);
+        $query->bindValue(':Ticket', $uploadfichier, PDO::PARAM_STR);
+        $query->bindValue(':Manuel', $Manuel, PDO::PARAM_STR);
+        // excute tt les param rentrer
+        $query->execute();
+        // On parametre le message si tout à fonctionner
+        $_SESSION['message'] = "Votre Produit à été modifié";
+        // On ferme la base de donnée
+        require_once('assets/require/close.php');
+        // On fait la redirection vers la dashboard ou sera affiché le message 
+        header('Location:dashboard.php');
     }else{
         // On parametre le message d'erreur si les champs ne sont pas complet
         $_SESSION['erreur'] = "Le formulaire est incomplet";
@@ -95,7 +105,6 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
     $_SESSION['erreur'] = "URL invalide";
     header('Location: dashboard.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -147,7 +156,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 ?>
                 <h1>Modifier le produit:<br> <?= $produit['Nom'] ?></h1>
                 <!-- Début du Formulaire de modification d'un Produit -->
-                <form method="post">
+                <form method="post" action="" enctype="multipart/form-data">
                     <div class="form-group">
                         <label for="Nom">Nom</label>
                         <input type="text" id="Nom" name="Nom" class="form-control" value="<?php echo "$produit[Nom]"?>">
@@ -205,8 +214,9 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                         <input type="text" id="Conseils" name="Conseils" class="form-control" value="<?php echo "$produit[Conseils]"?>">
                     </div>
                     <div class="form-group">
-                        <label for="Ticket">Ticket d'achat</label>
-                        <input type="text" id="Ticket" name="Ticket" class="form-control" value="<?php echo "$produit[Ticket]"?>">
+                        <label for="Ticket">Ticket d'achat</label><br>
+                        <input type="file" id="Ticket" name="Ticket">
+                        <img src="<?php echo "$produit[Ticket]";?>" alt="Ticket" width="100px">
                     </div>
                     <div class="form-group">
                         <label>Manuel d'utilisation</label>

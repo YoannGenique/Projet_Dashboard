@@ -93,7 +93,7 @@ if(isset($_GET['id']) && !empty($_GET['id'])){
                 <p>Lieux D'achat: <?= $produit['Lieux'] ?></p>
                 <p>Date fin de Garantie: <?= $produit['fingarantie'] ?></p>
                 <p>Conseils d'entretiens: <?= $produit['Conseils'] ?></p>
-                <p>Ticket D'achat: <?= $produit['Ticket'] ?></p>
+                <p>Ticket D'achat:<br> <img src="<?php echo "$produit[Ticket]";?>" alt="Ticket" width="100px">
                 <p>Manuel d'utilisation: <?= $produit['Manuel'] ?></p>
                 <!-- Lien vers la page retour, suppression et modification du produit -->
                 <p><a href="dashboard.php"><img src="assets/img/retour.png" alt="retour" width="50px" height="50px"></a> <a href="modif.php?id=<?= $produit['id'] ?>"><img src="assets/img/modif.png" alt="retour" width="50px" height="50px"></a>  <a href="assets/require/supp.php?id=<?= $produit['id'] ?>"><img src="assets/img/Supprimer.png" alt="retour" width="50px" height="50px"></a></p>
