@@ -6,7 +6,7 @@ if(!isset($_SESSION['mail']) && !isset($_SESSION['pass'])){
     $_SESSION['nolog'] = "Veuillez vous identifiez";
     header('location:index.php');
 }
-// jsp
+//Si la var $_POST, $_FILES sont déclaré
 if($_POST && $_FILES){
     //Vérifie Si les champs ne sont pas vide
     if(isset($_POST['Nom']) && !empty($_POST['Nom'])
