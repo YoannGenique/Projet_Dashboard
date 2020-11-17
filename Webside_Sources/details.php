@@ -9,7 +9,7 @@ if(!isset($_SESSION['mail']) && !isset($_SESSION['pass'])){
 
 // es que l'ID existe est n'est pas vide dans l'url
 if(isset($_GET['id']) && !empty($_GET['id'])){
-    // Connexion à la base
+    // Connexion à la base, require stop le script si y'a une erreur comparer à include et once sert à la vérification de si le code à déjà été excécuter 
     require_once('assets/require/connect.php');
     
     // On nettoie l'id envoyé

@@ -10,7 +10,7 @@ $password = strip_tags($_POST['password']);
 // Si quelque chose est déclaré
 if (isset($_POST['email']) && isset($_POST['password'])){
 
-    // On se connect à la base de données
+    // On se connect à la base de données, require stop le script si y'a une erreur comparer à include et once sert à la vérification de si le code à déjà été excécuter 
     require_once('../require/connect.php');
 
     // On prepare une demande de récuperer tout dans colonne email de la table users
@@ -22,7 +22,7 @@ if (isset($_POST['email']) && isset($_POST['password'])){
     // excute tt les param rentrer
     $query->execute();
 
-    // Me rappel plus à quoi sa sert
+    // recup l'entrée de tableau pour l'insérer dans résult
     $result = $query->fetch(PDO::FETCH_ASSOC);
 
     // Si L'email rentrer & le mdp correspond à celui trouver dans la db alors on accede à la connexion

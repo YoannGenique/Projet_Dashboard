@@ -20,7 +20,7 @@ if($_POST && $_FILES){
     && isset($_FILES['Ticket']) && !empty($_FILES['Ticket'])
     && isset($_POST['Manuel'])){
             
-        // On se connect à la base de donnée
+        // On se connect à la base de donnée,  require stop le script si y'a une erreur comparer à include et once sert à la vérification de si le code à déjà été excécuter 
         require_once('assets/require/connect.php');
             
         // On nettoie les données envoyées
@@ -64,7 +64,7 @@ if($_POST && $_FILES){
         $query->execute();
         // On parametre le message si tout à fonctionner
         $_SESSION['message'] = "Success Votre Produit à été Ajouter avec succès";
-        // On ferme la base de donnée
+        // On ferme la base de donnée,  require stop le script si y'a une erreur comparer à include et once sert à la vérification de si le code à déjà été excécuter 
         require_once('assets/require/close.php');
         // On fait la redirection vers la dashboard ou sera affiché le message 
         header('Location:dashboard.php');
