@@ -40,7 +40,7 @@ if($_POST && $_FILES){
         $uploadchemin = 'assets/imgproduit/';
         // On insert dans la var $uploadfile le chemin plus nom du fichier envoyer dans la $_FILES
         $uploadfichier = $uploadchemin . basename($_FILES['Ticket']['name']);
-        // Si le fichier télécharger n'est pas déplacé à l'endroit indiqué
+        // Si le fichier télécharger n'est pas déplacé à l'endroit indiqué alors il sera déplacé
         if (!move_uploaded_file($_FILES['Ticket']['tmp_name'], $uploadfichier)){
             $_SESSION['erreurticket'] = "Il y'a eu un problème avec l'importation du ticket";
         }
@@ -49,7 +49,7 @@ if($_POST && $_FILES){
         $sql = 'INSERT INTO `produit` (`Nom`, `Reference`, `Categorie`, `Dateachat`, `Prix`, `Lieux`, `fingarantie`, `Conseils`, `Ticket`, `Manuel`) VALUES (:Nom, :Reference, :Categorie, :Dateachat, :Prix, :Lieux, :fingarantie, :Conseils, :Ticket, :Manuel)';
         // On prepare la requête
         $query = $db->prepare($sql);
-        // On param notre  requete query avec le param adéquat à chaque champ
+        // On param notre  requete query avec le param adéquat à chaque champ(associe une valeur à un param)(param varchar text)
         $query->bindValue(':Nom', $Nom, PDO::PARAM_STR);
         $query->bindValue(':Reference', $Reference, PDO::PARAM_STR);
         $query->bindValue(':Categorie', $Categorie, PDO::PARAM_STR);
